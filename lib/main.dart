@@ -7,7 +7,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// رابط الموقع الذي يعرضه التطبيق.
-const kSiteUrl = 'http://a.qfilm.tv';
+const kSiteUrl = 'https://a.qfilm.tv';
 
 /// النطاق المسموح بالتنقل إليه (ومعه كل نطاقاته الفرعية).
 const kSiteDomain = 'qfilm.tv';
@@ -173,6 +173,11 @@ class _ShellState extends State<Shell> {
     mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
     contentBlockers: _blockers(s.blockAds),
     transparentBackground: false,
+    // يظهر كمتصفح Chrome عادي (بعض المواقع ترسل صفحة بديلة لمتصفحات التطبيقات المدمجة).
+    userAgent:
+        'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36',
+    // لا يرسل الترويسة X-Requested-With التي تكشف اسم التطبيق.
+    requestedWithHeaderOriginAllowList: <String>{},
   );
 
   Future<void> _reload() async {
